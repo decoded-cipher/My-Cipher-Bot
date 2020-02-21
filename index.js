@@ -32,29 +32,29 @@ bot.on('message', (msg) => {
 // const ref = firebase.database().ref();
 // const sitesRef = ref.child("sites");
 
-// let siteUrl;
-// bot.onText(/\/bookmark (.+)/, (msg, match) => {
-//   siteUrl = match[1];
-//   bot.sendMessage(msg.chat.id,'Got it Arjun. Which category does it belong to...?', {
-//     reply_markup: {
-//       inline_keyboard: [[
-//         {
-//           text: 'HTML',
-//           callback_data: 'HTML'
-//         },{
-//           text: 'CSS',
-//           callback_data: 'CSS'
-//         },{
-//           text: 'JavaScript',
-//           callback_data: 'JavaScript'
-//         },{
-//             text: 'Others',
-//             callback_data: 'Others'
-//           }
-//       ]]
-//     }
-//   });
-// });
+let siteUrl;
+bot.onText(/\/bookmark (.+)/, (msg, match) => {
+  siteUrl = match[1];
+  bot.sendMessage(msg.chat.id,'Got it Arjun. Which category does it belong to...?', {
+    reply_markup: {
+      inline_keyboard: [[
+        {
+          text: 'HTML',
+          callback_data: 'HTML'
+        },{
+          text: 'CSS',
+          callback_data: 'CSS'
+        },{
+          text: 'JavaScript',
+          callback_data: 'JavaScript'
+        },{
+            text: 'Others',
+            callback_data: 'Others'
+          }
+      ]]
+    }
+  });
+});
 
 // bot.on("callback_query", (callbackQuery) => {
 //     const message = callbackQuery.message;
