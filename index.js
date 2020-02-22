@@ -34,22 +34,29 @@ bot.onText(/\/bookmark_url (.+)/, (msg, match) => {
     reply_markup: {
       inline_keyboard: [[
         {
-          text: 'HTML',
-          callback_data: 'HTML'
-        },{
-          text: 'CSS',
-          callback_data: 'CSS'
+          text: 'HTML/CSS',
+          callback_data: 'HTML/CSS'
         },{
           text: 'JavaScript',
           callback_data: 'JavaScript'
         },{
             text: 'PHP',
             callback_data: 'PHP'
-          },{
-            text: 'Others',
-            callback_data: 'Others'
-          }
-      ]]
+        }],
+        [{
+            text: 'Node.js',
+            callback_data: 'Node.js'
+        },{
+            text: 'Vue.js',
+            callback_data: 'Vue.js'
+        },{
+            text: 'IoT',
+            callback_data: 'IoT'
+        }],
+        [{
+        text: 'Others',
+        callback_data: 'Others'
+        }]]
     }
   });
 });
