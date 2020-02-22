@@ -26,21 +26,27 @@ const sitesRef = ref.child("sites");
 let siteUrl;
 
 // Reply to /bookmark
-bot.onText(/\/bookmark (.+)/, (msg, match) => {
+bot.onText(/\/bookmark_url (.+)/, (msg, match) => {
   siteUrl = match[1];
-  bot.sendMessage(msg.chat.id,'Got it, in which category?', {
+  bot.sendMessage(msg.chat.id,'Got it Arjun, Just specify the category?', {
     reply_markup: {
       inline_keyboard: [[
         {
-          text: 'Development',
-          callback_data: 'development'
+          text: 'HTML',
+          callback_data: 'HTML'
         },{
-          text: 'Music',
-          callback_data: 'music'
+          text: 'CSS',
+          callback_data: 'CSS'
         },{
-          text: 'Cute monkeys',
-          callback_data: 'cute-monkeys'
-        }
+          text: 'JavaScript',
+          callback_data: 'JavaScript'
+        },{
+            text: 'PHP',
+            callback_data: 'PHP'
+          },{
+            text: 'Others',
+            callback_data: 'Others'
+          }
       ]]
     }
   });
@@ -69,7 +75,7 @@ bot.on("callback_query", (callbackQuery) => {
         url: siteUrl
       });
       // Reply 
-      bot.sendMessage(message.chat.id,'Added new website, but there was no OG data!');
+      bot.sendMessage(message.chat.id,'You added a new website. Ill store it in my database. Just ring me when its needed...');
     }
   });
 });
