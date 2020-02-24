@@ -84,7 +84,7 @@ bot.on("callback_query", (callbackQuery) => {
         url: siteUrl
       });
       // Reply 
-      bot.sendMessage(message.chat.id,'You added a new website. Ill store it in my database. Just ring me when its needed...');
+      bot.sendMessage(message.chat.id,'Arjun, I think, you added something crazy. Just review your entry mahn...!');
     }
   });
 });
