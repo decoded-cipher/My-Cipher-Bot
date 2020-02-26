@@ -1,0 +1,24 @@
+{
+  "name": "my-cipher-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/decoded-cipher/My-Cipher-Bot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/decoded-cipher/My-Cipher-Bot/issues"
+  },
+  "homepage": "https://github.com/decoded-cipher/My-Cipher-Bot#readme",
+  "dependencies": {
+    "firebase": "^7.9.1",
+    "node-telegram-bot-api": "^0.40.0",
+    "open-graph-scraper": "^3.6.2"
+  }
+}
