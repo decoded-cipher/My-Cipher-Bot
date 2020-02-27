@@ -101,8 +101,19 @@ bot.onText(/\/movie (.+)/, (msg, match) => {
   var chatId = msg.chat.id;
   request(`http://www.omdbapi.com/?apikey=82043cb7&t=${movie}`,function(error,response,body) {
     if(!error && response.statusCode == 200) {
-      bot.sendMessage(chatId, '_Looking for _' + movie + '...', {parse_mode: 'Markdown'});
+      bot.sendMessage(chatId, '_Looking for _' + movie + '...', {parse_mode: 'Markdown'})
+     
       bot.sendMessage(chatId, 'Result:\n' + body);
+
+      // .then(function(msg) {
+      //   var res = JSON.parse(body);
+      //   bot.sendMessage(chatId, 
+      //     'Result: \nTitle: ' + res.Title + 
+      //     '\nYear: ' + res.Year + 
+      //     '\nRated: ' + res.Rated + 
+      //     '\nReleased: ' + res.Released
+      //     );
+      // })
     }
   });
 });
