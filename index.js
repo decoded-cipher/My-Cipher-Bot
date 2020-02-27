@@ -25,6 +25,7 @@ const app = firebase.initializeApp({
 const ref = firebase.database().ref();
 const sitesRef = ref.child("sites");
 
+
 // Reply to /hellobot
 bot.onText(/\/hellobot (.+)/, (msg, match) => {  
 bot.sendMessage(msg.chat.id, 'Ahoy Pirate. Its me, your Cipher Bot. Thanks for your call. But, dont disturb me for an hour or so. Let me have a nap. Im feeling so sleepy. Bye.');
@@ -93,3 +94,16 @@ bot.on("callback_query", (callbackQuery) => {
     }
   });
 });
+
+var request = require('request');
+bot.onText(/\/movie (.+)/, (msg, match) => {
+  var movie = match[1];
+  var chatId = msg.chat.id;
+  request(`http://www.omdbapi.com/?apikey=82043cb7&t=${movie}`,function(error,response,body) {
+    if(!error && response.statusCode == 200) {
+      bot.sendMessage(chatId, '_Looking for _' + movie + '...', {parse_mode: 'Markdown'});
+      bot.sendMessage(chatId, 'Result:\n' + body);
+    }
+  });
+});
+
