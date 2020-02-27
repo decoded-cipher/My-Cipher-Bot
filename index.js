@@ -103,17 +103,35 @@ bot.onText(/\/movie (.+)/, (msg, match) => {
     if(!error && response.statusCode == 200) {
       bot.sendMessage(chatId, '_Looking for _' + movie + '...', {parse_mode: 'Markdown'})
      
-      bot.sendMessage(chatId, 'Result:\n' + body);
+      // bot.sendMessage(chatId, 'Result:\n' + body);
 
-      // .then(function(msg) {
-      //   var res = JSON.parse(body);
-      //   bot.sendMessage(chatId, 
-      //     'Result: \nTitle: ' + res.Title + 
-      //     '\nYear: ' + res.Year + 
-      //     '\nRated: ' + res.Rated + 
-      //     '\nReleased: ' + res.Released
-      //     );
-      // })
+      .then(function(msg) {
+        var res = JSON.parse(body);
+        
+        // bot.sendMessage(chatId, 
+        //   'Result: \nTitle: ' + res.Title + 
+        //   '\nYear: ' + res.Year + 
+        //   '\nRated: ' + res.Rated + 
+        //   '\nReleased: ' + res.Released + 
+        //   '\nRuntime: ' + res.Runtime + 
+        //   '\nGenre: ' + res.Genre + 
+        //   '\nDirector: ' + res.Director +
+        //   '\nBoxOffice: ' + res.BoxOffice 
+        // );
+      
+        bot.sendPhoto(chatId, res.Poster,{caption: 
+          'Result: \nTitle: ' + res.Title + 
+          '\nYear:  ' + res.Year + 
+          '\nRated:  ' + res.Rated + 
+          '\nReleased:  ' + res.Released + 
+          '\nRuntime:  ' + res.Runtime + 
+          '\nGenre:  ' + res.Genre + 
+          '\nLanguage:  ' + res.Language + 
+          '\nDirector:  ' + res.Director +
+          '\nBoxOffice:  ' + res.BoxOffice + 
+          '\nProduction:  ' + res.Production 
+        })
+      })
     }
   });
 });
