@@ -25,9 +25,14 @@ const app = firebase.initializeApp({
 const ref = firebase.database().ref();
 const sitesRef = ref.child("sites");
 
-let siteUrl;
+// Reply to /hellobot
+bot.onText(/\/hellobot (.+)/, (msg, match) => {  
+bot.sendMessage(msg.chat.id, 'Ahoy Pirate. Its me, your Cipher Bot. Thanks for your call. But, dont disturb me for an hour or so. Let me have a nap. Im feeling so sleepy. Bye.');
+});
+
 
 // Reply to /bookmark
+let siteUrl;
 bot.onText(/\/bookmark_url (.+)/, (msg, match) => {
   siteUrl = match[1];
   bot.sendMessage(msg.chat.id,'Got it Arjun, Just specify the category?', {
