@@ -2,6 +2,8 @@ var PORT = process.env.PORT || 5000;
 
 process.env.NTBA_FIX_319 = 1;
 
+var request = require('request');
+
 const TelegramBot = require('node-telegram-bot-api');
 const ogs = require('open-graph-scraper');
 const firebase = require('firebase');
@@ -95,7 +97,7 @@ bot.on("callback_query", (callbackQuery) => {
   });
 });
 
-var request = require('request');
+
 bot.onText(/\/movie (.+)/, (msg, match) => {
   var movie = match[1];
   var chatId = msg.chat.id;
@@ -140,3 +142,18 @@ bot.onText(/\/movie (.+)/, (msg, match) => {
   });
 });
 
+
+// Reply to /weather
+bot.onText(/\/weather (.+)/, (msg, match) => {
+  var weather = match[1];
+  var chatId = msg.chat.id;
+
+  request(`https://api.openweathermap.org/data/2.5/weather?appid=2bcb097bf4c56ac64396c9db27e959e6&q=${weather}`,function(error,response,body) {
+    if(!error && response.statusCode == 200) {
+      var res = JSON.parse(body);
+      console.log(res);
+
+      // bot.sendMessage(chatId, 'Result:\n' + body);
+    }
+  })
+})
