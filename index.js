@@ -103,7 +103,7 @@ bot.onText(/\/movie (.+)/, (msg, match) => {
     if(!error && response.statusCode == 200) {
       bot.sendMessage(chatId, '_Looking for _' + movie + '...', {parse_mode: 'Markdown'})
      
-      // bot.sendMessage(chatId, 'Result:\n' + body);
+      // bot.sendMessage(chatId, 'Result:\n' + body)
 
       .then(function(msg) {
         var res = JSON.parse(body);
@@ -116,9 +116,12 @@ bot.onText(/\/movie (.+)/, (msg, match) => {
         //   '\nRuntime: ' + res.Runtime + 
         //   '\nGenre: ' + res.Genre + 
         //   '\nDirector: ' + res.Director +
-        //   '\nBoxOffice: ' + res.BoxOffice 
+        //   '\nBoxOffice: ' + res.BoxOffice +
+        //   '\nAwards:  ' + res.Awards
         // );
       
+//-----------------------------------------------------------------------------------------------------------------------------------
+
         bot.sendPhoto(chatId, res.Poster,{caption: 
           'Result: \nTitle: ' + res.Title + 
           '\nYear:  ' + res.Year + 
@@ -129,7 +132,8 @@ bot.onText(/\/movie (.+)/, (msg, match) => {
           '\nLanguage:  ' + res.Language + 
           '\nDirector:  ' + res.Director +
           '\nBoxOffice:  ' + res.BoxOffice + 
-          '\nProduction:  ' + res.Production 
+          '\nProduction:  ' + res.Production +
+          '\nAwards:  ' + res.Awards
         })
       })
     }
