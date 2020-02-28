@@ -1,7 +1,4 @@
 var PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`App is running on port ${ PORT }`);
-});
 
 process.env.NTBA_FIX_319 = 1;
 
