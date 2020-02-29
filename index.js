@@ -150,19 +150,44 @@ bot.onText(/\/weather (.+)/, (msg, match) => {
 
   request(`https://api.openweathermap.org/data/2.5/weather?appid=2bcb097bf4c56ac64396c9db27e959e6&q=${weather}`,function(error,response,body) {
     if(!error && response.statusCode == 200) {
+      bot.sendMessage(chatId, '_Looking for weather at  _' + weather + '...', {parse_mode: 'Markdown'})
+      .then(function(msg) {
+
       var res = JSON.parse(body);
       console.log(res);
 
       // bot.sendMessage(chatId, 'Result:\n' + body);
 
+      var icon_url = `http://openweathermap.org/img/wn/${res.weather[0].icon}@2x.png`;
+      var temperature = res.main.temp - 273.15;
+      var sky, clouds = res.clouds.all;
 
-      // bot.sendMessage(chatId, 
-      //   'Result: \nCity:  ' + res.name + ', ' + res.sys.country +
-      //   '\nHumidity:  ' + res.main.humidity +
-      //   '\nPressure:  ' + res.main.pressure +
-      //   '\nHumidity:  ' + res.main.humidity +
-
-      // );
+      if(clouds >= 0 && clouds <= 10)
+        sky = 'Clear Sky';
+      else if(clouds >= 11 & clouds <= 25)
+        sky = 'Few Clouds';
+      else if(clouds >= 26 & clouds <= 50)
+        sky = 'Scattered Clouds';
+      else if(clouds >= 51 & clouds <= 84)
+        sky = 'Broken Clouds';
+      else
+        sky = 'Overcast Clouds';
+      
+        bot.sendMessage(chatId,
+        // bot.sendPhoto(chatId, icon_url,{caption:  
+          'Result : \nCity :  ' + res.name + ', ' + res.sys.country +
+          // '\nCoordinates:'   + res.name + ', ' + res.sys.country +
+          '\n\nAtmosphere :  ' + res.weather[0].main +
+          '\nCloudliness :  ' + sky +
+          '\nTemperature :  ' + temperature + '°C' +
+          '\nHumidity :  ' + res.main.humidity + ' %' + 
+          '\nPressure :  ' + res.main.pressure + ' hPa' +
+          '\n\nWind :  ' + res.wind.speed + 'm/s, ' + 
+          '\nAngle :  ' + res.wind.deg + ' °' 
+          // '\nIcon:  ' + res.weather[0].icon
+        // }
+        );
+      })
     }
   })
 })
