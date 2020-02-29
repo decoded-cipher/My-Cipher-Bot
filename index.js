@@ -182,7 +182,6 @@ bot.onText(/\/weather (.+)/, (msg, match) => {
       var date = new Date(sec * 1000);
       var sunset = date.toLocaleTimeString();
       // console.log(sunset);
-
       
         bot.sendMessage(chatId,
         // bot.sendPhoto(chatId, icon_url,{caption:  
@@ -193,10 +192,10 @@ bot.onText(/\/weather (.+)/, (msg, match) => {
           '\nTemperature :  ' + temperature + '°C' +
           '\nHumidity :  ' + res.main.humidity + ' %' + 
           '\nPressure :  ' + res.main.pressure + ' hPa' +
-          '\nWind :  ' + res.wind.speed + 'm/s, ' + '| Angle :  ' + res.wind.deg + ' °' +
+          '\nWind :  ' + res.wind.speed + ' m/s ' + '| Angle :  ' + res.wind.deg + '°' +
           '\n\nSunrise :  ' + sunrise + 
-          '\nSunset :  ' + sunset 
-          // '\nIcon:  ' + res.weather[0].icon
+          '\nSunset :  ' + sunset +
+          '\n\nLatitude :  ' + res.coord.lat + '\nLongitude :  ' + res.coord.lon
         // }
         );
       })
