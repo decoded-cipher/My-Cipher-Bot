@@ -150,15 +150,15 @@ bot.onText(/\/weather (.+)/, (msg, match) => {
 
   request(`https://api.openweathermap.org/data/2.5/weather?appid=2bcb097bf4c56ac64396c9db27e959e6&q=${weather}`,function(error,response,body) {
     if(!error && response.statusCode == 200) {
-      bot.sendMessage(chatId, '_Looking for weather at  _' + weather + '...', {parse_mode: 'Markdown'})
+      bot.sendMessage(chatId, `_Fetching weather details from ${weather}..._`, {parse_mode: 'Markdown'})
       .then(function(msg) {
-
       var res = JSON.parse(body);
+
       console.log(res);
 
       // bot.sendMessage(chatId, 'Result:\n' + body);
-
-      var icon_url = `http://openweathermap.org/img/wn/${res.weather[0].icon}@2x.png`;
+      // var icon_url = `http://openweathermap.org/img/wn/${res.weather[0].icon}@2x.png`;
+      
       var temperature = res.main.temp - 273.15;
       var sky, clouds = res.clouds.all;
 
@@ -172,6 +172,17 @@ bot.onText(/\/weather (.+)/, (msg, match) => {
         sky = 'Broken Clouds';
       else
         sky = 'Overcast Clouds';
+
+      var sec = res.sys.sunrise;
+      var date = new Date(sec * 1000);
+      var sunrise = date.toLocaleTimeString();
+      // console.log(sunrise);
+
+      var sec = res.sys.sunset;
+      var date = new Date(sec * 1000);
+      var sunset = date.toLocaleTimeString();
+      // console.log(sunset);
+
       
         bot.sendMessage(chatId,
         // bot.sendPhoto(chatId, icon_url,{caption:  
@@ -182,8 +193,9 @@ bot.onText(/\/weather (.+)/, (msg, match) => {
           '\nTemperature :  ' + temperature + '°C' +
           '\nHumidity :  ' + res.main.humidity + ' %' + 
           '\nPressure :  ' + res.main.pressure + ' hPa' +
-          '\n\nWind :  ' + res.wind.speed + 'm/s, ' + 
-          '\nAngle :  ' + res.wind.deg + ' °' 
+          '\nWind :  ' + res.wind.speed + 'm/s, ' + '| Angle :  ' + res.wind.deg + ' °' +
+          '\n\nSunrise :  ' + sunrise + 
+          '\nSunset :  ' + sunset 
           // '\nIcon:  ' + res.weather[0].icon
         // }
         );
