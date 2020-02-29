@@ -154,6 +154,15 @@ bot.onText(/\/weather (.+)/, (msg, match) => {
       console.log(res);
 
       // bot.sendMessage(chatId, 'Result:\n' + body);
+
+
+      // bot.sendMessage(chatId, 
+      //   'Result: \nCity:  ' + res.name + ', ' + res.sys.country +
+      //   '\nHumidity:  ' + res.main.humidity +
+      //   '\nPressure:  ' + res.main.pressure +
+      //   '\nHumidity:  ' + res.main.humidity +
+
+      // );
     }
   })
 })
