@@ -154,7 +154,7 @@ bot.onText(/\/weather (.+)/, (msg, match) => {
       .then(function(msg) {
       var res = JSON.parse(body);
 
-      // console.log(res);
+      console.log(res);
 
       // bot.sendMessage(chatId, 'Result:\n' + body);
       // var icon_url = `http://openweathermap.org/img/wn/${res.weather[0].icon}@2x.png`;
@@ -173,6 +173,11 @@ bot.onText(/\/weather (.+)/, (msg, match) => {
       else
         sky = 'Overcast Clouds';
 
+      var sec = res.dt;
+      var date = new Date(sec * 1000);
+      var presentTime = date.toLocaleTimeString();
+      // console.log(presetTime);
+
       var sec = res.sys.sunrise;
       var date = new Date(sec * 1000);
       var sunrise = date.toLocaleTimeString();
@@ -187,7 +192,8 @@ bot.onText(/\/weather (.+)/, (msg, match) => {
         // bot.sendPhoto(chatId, icon_url,{caption:  
           'Result : \nCity :  ' + res.name + ', ' + res.sys.country +
           // '\nCoordinates:'   + res.name + ', ' + res.sys.country +
-          '\n\nAtmosphere :  ' + res.weather[0].main +
+          '\n\nTime (IST) :  ' + presentTime +
+          '\nAtmosphere :  ' + res.weather[0].main +
           '\nCloudliness :  ' + sky +
           '\nTemperature :  ' + temperature + '°C' +
           '\nHumidity :  ' + res.main.humidity + ' %' + 
