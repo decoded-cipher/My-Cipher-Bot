@@ -154,7 +154,7 @@ bot.onText(/\/weather (.+)/, (msg, match) => {
       .then(function(msg) {
       var res = JSON.parse(body);
 
-      console.log(res);
+      // console.log(res);
 
       // bot.sendMessage(chatId, 'Result:\n' + body);
       // var icon_url = `http://openweathermap.org/img/wn/${res.weather[0].icon}@2x.png`;
