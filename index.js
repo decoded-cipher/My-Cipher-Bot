@@ -154,7 +154,7 @@ bot.onText(/\/weather (.+)/, (msg, match) => {
       .then(function(msg) {
       var res = JSON.parse(body);
 
-      // console.log(res);
+      console.log(res);
 
       // bot.sendMessage(chatId, 'Result:\n' + body);
       // var icon_url = `http://openweathermap.org/img/wn/${res.weather[0].icon}@2x.png`;
@@ -204,6 +204,37 @@ bot.onText(/\/weather (.+)/, (msg, match) => {
           '\n\nLatitude :  ' + res.coord.lat + '\nLongitude :  ' + res.coord.lon
         // }
         );
+      })
+    }
+  })
+})
+
+
+
+
+
+
+
+
+
+
+
+
+bot.onText(/\/news (.+)/, (msg, match) => {
+  var news = match[1];
+  var chatId = msg.chat.id;
+
+  request(`http://newsapi.org/v2/top-headlines?q=${news}&apiKey=4a0bb231b1db4357b1278797ebc07943&pageSize=1&country=in&page=1`,function(error,response,body) {
+    if(!error && response.statusCode == 200) {
+        bot.sendMessage(chatId, `_Fetching today's headlines on ${news}..._`, {parse_mode: 'Markdown'})
+        .then(function(msg) {
+        var res = JSON.parse(body);
+        console.log(res);
+        bot.sendMessage(chatId, 'Result:\n' + body);
+
+        // bot.sendMessage(chatId,
+        //   res.articles[0].title + '\n\n' + res.articles[0].description + '\n\n' + res.articles[0].url
+        // )
       })
     }
   })
