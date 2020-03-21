@@ -245,7 +245,7 @@ bot.onText(/\/news (.+)/, (msg, match) => {
 
   // request(`http://newsapi.org/v2/top-headlines?q=${news}&apiKey=4a0bb231b1db4357b1278797ebc07943&pageSize=2&country=in&page=1`,function(error,response,body) {
 
-  request(`http://newsapi.org/v2/top-headlines?q=${news}&apiKey=4a0bb231b1db4357b1278797ebc07943&pageSize=3&country=in`,function(error,response,body) {
+  request(`http://newsapi.org/v2/top-headlines?q=${news}&apiKey=4a0bb231b1db4357b1278797ebc07943&country=in`,function(error,response,body) {
     if(!error && response.statusCode == 200) {
         bot.sendMessage(chatId, `_Fetching today's headlines on ${news}..._`, {parse_mode: 'Markdown'})
         .then(function(msg) {
@@ -289,7 +289,7 @@ bot.onText(/\/article (.+)/, (msg, match) => {
   var article = match[1];
   var chatId = msg.chat.id;
 
-  request(`http://newsapi.org/v2/everything?q=${article}&apiKey=4a0bb231b1db4357b1278797ebc07943&pageSize=3`,function(error,response,body) {
+  request(`http://newsapi.org/v2/everything?q=${article}&apiKey=4a0bb231b1db4357b1278797ebc07943`,function(error,response,body) {
     if(!error && response.statusCode == 200) {
         bot.sendMessage(chatId, `_Fetching recent articles on ${article}..._`, {parse_mode: 'Markdown'})
         .then(function(msg) {
