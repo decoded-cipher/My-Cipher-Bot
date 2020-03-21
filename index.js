@@ -109,6 +109,8 @@ bot.onText(/\/movie (.+)/, (msg, match) => {
 
       .then(function(msg) {
         var res = JSON.parse(body);
+
+        // console.log(res);
         
         // bot.sendMessage(chatId, 
         //   'Result: \nTitle: ' + res.Title + 
@@ -154,7 +156,7 @@ bot.onText(/\/weather (.+)/, (msg, match) => {
       .then(function(msg) {
       var res = JSON.parse(body);
 
-      console.log(res);
+      // console.log(res);
 
       // bot.sendMessage(chatId, 'Result:\n' + body);
       // var icon_url = `http://openweathermap.org/img/wn/${res.weather[0].icon}@2x.png`;
@@ -210,32 +212,71 @@ bot.onText(/\/weather (.+)/, (msg, match) => {
 })
 
 
-
-
-
-
-
-
-
-
-
-
+// Reply to /news
 bot.onText(/\/news (.+)/, (msg, match) => {
   var news = match[1];
   var chatId = msg.chat.id;
 
-  request(`http://newsapi.org/v2/top-headlines?q=${news}&apiKey=4a0bb231b1db4357b1278797ebc07943&pageSize=1&country=in&page=1`,function(error,response,body) {
+// bot.sendMessage(msg.chat.id,'Got it Arjun, Just specify the category?', {
+//   reply_markup: {
+//     inline_keyboard: [[
+//       {
+//         text: 'Top Headlines',
+//         callback_data: 'top-headlines'
+//       },{
+//         text: 'Articles',
+//         callback_data: 'everything'
+//       }]]
+//   }
+// });
+
+// // Callback query
+// bot.on("callback_query", (callbackQuery) => {
+//   const message = callbackQuery.message;
+//   bot.answerCallbackQuery(callbackQuery.id)
+//     .then(() => 
+//     bot.sendMessage(message.chat.id, "You clicked " + callbackQuery.data + ""));
+//     request(`http://newsapi.org/v2/${callbackQuery.data}?q=${news}&apiKey=4a0bb231b1db4357b1278797ebc07943&country=in`,function(error,response,body) {
+//     if(!error && response.statusCode == 200) {  
+//       var res = JSON.parse(body);
+//       console.log(res);
+//     }
+// });
+
+  // request(`http://newsapi.org/v2/top-headlines?q=${news}&apiKey=4a0bb231b1db4357b1278797ebc07943&pageSize=2&country=in&page=1`,function(error,response,body) {
+
+  request(`http://newsapi.org/v2/top-headlines?q=${news}&apiKey=4a0bb231b1db4357b1278797ebc07943&pageSize=3&country=in&page=1`,function(error,response,body) {
     if(!error && response.statusCode == 200) {
         bot.sendMessage(chatId, `_Fetching today's headlines on ${news}..._`, {parse_mode: 'Markdown'})
         .then(function(msg) {
         var res = JSON.parse(body);
         console.log(res);
-        bot.sendMessage(chatId, 'Result:\n' + body);
+
+        // bot.sendMessage(chatId, 'Result:\n' + body);
 
         // bot.sendMessage(chatId,
-        //   res.articles[0].title + '\n\n' + res.articles[0].description + '\n\n' + res.articles[0].url
+        //   'Author :  ' + res.articles[0].author + '\n' +
+        //   'Published At :  ' + res.articles[0].publishedAt + '\n\n' +
+        //   res.articles[0].title + '\n\n' + res.articles[0].description + '\n\n' + res.articles[0].url +
+        //   '\n\n' + res.articles[0].content
         // )
+
+        for (var result = 1; result <= res.totalResults; result++) {
+          bot.sendMessage(chatId,
+            'Source :  ' + res.articles[result-1].source.name + '\n' +
+            'Author:  '  + res.articles[result-1].author + '\n' +
+            'Published At :  ' + res.articles[result-1].publishedAt + '\n\n' +
+            res.articles[result-1].title + '\n\n' +
+            res.articles[result-1].description + '\n\n' +
+            res.articles[result-1].content + '\n\n' +
+            'Link :\n' + res.articles[result-1].url
+          )
+        }
+
       })
     }
   })
 })
+
+
+
