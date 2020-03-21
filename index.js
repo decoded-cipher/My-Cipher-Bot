@@ -34,6 +34,7 @@ bot.sendMessage(msg.chat.id, 'Ahoy Pirate. Its me, your Cipher Bot. Thanks for y
 });
 
 
+
 // Reply to /bookmark
 let siteUrl;
 bot.onText(/\/bookmark_url (.+)/, (msg, match) => {
@@ -98,6 +99,7 @@ bot.on("callback_query", (callbackQuery) => {
 });
 
 
+
 bot.onText(/\/movie (.+)/, (msg, match) => {
   var movie = match[1];
   var chatId = msg.chat.id;
@@ -145,6 +147,7 @@ bot.onText(/\/movie (.+)/, (msg, match) => {
 });
 
 
+
 // Reply to /weather
 bot.onText(/\/weather (.+)/, (msg, match) => {
   var weather = match[1];
@@ -178,7 +181,7 @@ bot.onText(/\/weather (.+)/, (msg, match) => {
       var sec = res.dt;
       var date = new Date(sec * 1000);
       var presentTime = date.toLocaleTimeString();
-      // console.log(presetTime);
+      // console.log(date);
 
       var sec = res.sys.sunrise;
       var date = new Date(sec * 1000);
@@ -210,6 +213,7 @@ bot.onText(/\/weather (.+)/, (msg, match) => {
     }
   })
 })
+
 
 
 // Reply to /news
@@ -252,7 +256,6 @@ bot.onText(/\/news (.+)/, (msg, match) => {
         var res = JSON.parse(body);
 
         // console.log(res);
-
         // bot.sendMessage(chatId, 'Result:\n' + body);
 
         // bot.sendMessage(chatId,
@@ -263,10 +266,19 @@ bot.onText(/\/news (.+)/, (msg, match) => {
         // )
 
         for (var result = 1; result <= res.totalResults; result++) {
+          
+          var d = new Date(res.articles[result-1].publishedAt);
+          var presentTime = d.toLocaleTimeString();
+          var presentDate = d.toLocaleDateString();
+
+          // console.log(presentTime);
+          // console.log(presentDate);
+          // console.log(d);
+          
           bot.sendMessage(chatId,
             'Source :  ' + res.articles[result-1].source.name + '\n' +
             'Author:  '  + res.articles[result-1].author + '\n' +
-            'Published At :  ' + res.articles[result-1].publishedAt + '\n\n' +
+            'Published At :  ' + presentDate + ', ' + presentTime + '\n\n' +
             res.articles[result-1].title + '\n\n' +
             res.articles[result-1].description + '\n\n' +
             res.articles[result-1].content + '\n\n' +
@@ -278,9 +290,6 @@ bot.onText(/\/news (.+)/, (msg, match) => {
     }
   })
 })
-
-
-
 
 
 
@@ -298,10 +307,15 @@ bot.onText(/\/article (.+)/, (msg, match) => {
         // console.log(res);
 
         for (var result = 1; result <= res.totalResults; result++) {
+
+          var d = new Date(res.articles[result-1].publishedAt);
+          var presentTime = d.toLocaleTimeString();
+          var presentDate = d.toLocaleDateString();
+
           bot.sendMessage(chatId,
             'Source :  ' + res.articles[result-1].source.name + '\n' +
             'Author:  '  + res.articles[result-1].author + '\n' +
-            'Published At :  ' + res.articles[result-1].publishedAt + '\n\n' +
+            'Published At :  ' + presentDate + ', ' + presentTime + '\n\n' +
             res.articles[result-1].title + '\n\n' +
             res.articles[result-1].description + '\n\n' +
             res.articles[result-1].content + '\n\n' +
