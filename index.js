@@ -28,6 +28,48 @@ const ref = firebase.database().ref();
 const sitesRef = ref.child("sites");
 
 
+
+// Reply to /start
+bot.onText(/\/start/, (msg, match) => {
+  const start = match.input.split(' ')[1];
+  // var start = match[1];
+  // console.log(start);
+  var chatId = msg.chat.id;
+  if (start === undefined) {
+    bot.sendMessage(
+      chatId, 'Welcome, " ' + msg.chat.first_name + ' ' + msg.chat.last_name
+      + ' " to " My Cipher Bot ",\nThe personalized Telegram Bot for self-learning and '
+      + '\nself-experimenting adventures on anything and everything, \nfor own creator " Mr. Arjun Krishna ".\n🙂'
+      );
+    // return;
+    bot.sendMessage(
+      chatId, '😂 Sorry for being so official in words at the first time... 😂'
+      );
+    // return;
+    bot.sendMessage(
+      chatId, 'Hello ' + msg.chat.first_name + ',' + '\nMyself Cipher Bot. \nI am the personal telegram assistant of " Mr. Decoded_Cipher ".'
+        + '\nSorry, " Mr. Arjun Krishna ".'
+        + '\n\nI was built for serving purposes, that my creator finds it boring, but useful and is essential.'
+        + ' He also let me serve his friends and collegues, who may share his same feeling.'
+        + '\n\nYou can access my features by utilizing the commands listed, that precede a "/" symbol.'
+        + '\nWhat are you waiting for... \nLet us dig in...\n🙂'
+      );
+    // return;
+    bot.sendMessage(
+      chatId, 'Let these examples guide you to use the commands effectively:'
+        + '\n\n-  /hellobot Hai - Waiting for your message\n("Hai" is any message)'
+        + '\n-  /movie Avatar - For Movie details\n("Avatar" is any movie name)'
+        + '\n-  /weather Kottayam - For weather updation\n("Kottayam" is any main location)'
+        + '\n-  /news Corona - For top-headlines\n("Corona" is any keyword)'
+        + '\n-  /article Bitcoin - For blogs and articles\n("Bitcoin" is any keyword)'
+        + '\n-  /bookmark_url link - For saving URLs\n("link" is any valid URL)'
+      );
+    return;
+  }
+});
+
+
+
 // Reply to /hellobot
 bot.onText(/\/hellobot (.+)/, (msg, match) => {  
 bot.sendMessage(msg.chat.id, 'Ahoy Pirate. Its me, your Cipher Bot. Thanks for your call. But, dont disturb me for an hour or so. Let me have a nap. Im feeling so sleepy. Bye.');
