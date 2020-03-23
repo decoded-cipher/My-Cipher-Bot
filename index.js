@@ -81,7 +81,7 @@ bot.sendMessage(msg.chat.id, 'Ahoy Pirate. Its me, your Cipher Bot. Thanks for y
 let siteUrl;
 bot.onText(/\/bookmark_url (.+)/, (msg, match) => {
   siteUrl = match[1];
-  bot.sendMessage(msg.chat.id,'Got it Arjun, Just specify the category?', {
+  bot.sendMessage(msg.chat.id,'Got it ' +msg.chat.first_name + ', Just specify the category?', {
     reply_markup: {
       inline_keyboard: [[
         {
@@ -135,7 +135,7 @@ bot.on("callback_query", (callbackQuery) => {
         url: siteUrl
       });
       // Reply 
-      bot.sendMessage(message.chat.id,'Arjun, I think, you added something crazy. Just review your entry mahn...!');
+      bot.sendMessage(message.chat.id, message.chat.first_name +', I think, you added something crazy. Just review your entry mahn...!');
     }
   });
 });
