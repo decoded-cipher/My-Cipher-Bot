@@ -32,8 +32,10 @@ const sitesRef = ref.child("sites");
 // Reply to /start
 bot.onText(/\/start/, (msg, match) => {
   const start = match.input.split(' ')[1];
+
   // var start = match[1];
   // console.log(start);
+  
   var chatId = msg.chat.id;
   if (start === undefined) {
     bot.sendMessage(
@@ -335,8 +337,8 @@ bot.onText(/\/news (.+)/, (msg, match) => {
 
 
 
-// Reply to /article
-bot.onText(/\/article (.+)/, (msg, match) => {
+// Reply to /articles
+bot.onText(/\/articles (.+)/, (msg, match) => {
   var article = match[1];
   var chatId = msg.chat.id;
 
