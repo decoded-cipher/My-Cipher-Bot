@@ -144,6 +144,7 @@ bot.on("callback_query", (callbackQuery) => {
 
 
 
+// Reply to /movie
 bot.onText(/\/movie (.+)/, (msg, match) => {
   var movie = match[1];
   var chatId = msg.chat.id;
@@ -329,7 +330,6 @@ bot.onText(/\/news (.+)/, (msg, match) => {
             'Link :\n' + res.articles[result-1].url
           )
         }
-
       })
     }
   })
@@ -366,6 +366,37 @@ bot.onText(/\/articles (.+)/, (msg, match) => {
             'Link :\n' + res.articles[result-1].url
           )
         }
+      })
+    }
+  })
+})
+
+
+
+// Reply to everything 
+// bot.on('message', function (msg) {
+//   console.log(msg);
+//   bot.sendMessage(msg.chat.id, msg.text);
+// });
+
+
+
+// Reply to /search
+bot.onText(/\/search (.+)/, (msg, match) => {
+  var search = match[1];
+  var chatId = msg.chat.id;
+
+  console.log(search);
+
+  request(`https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&titles=${search}`,function(error, response, body) {
+    if(!error && response.statusCode == 200) {
+        bot.sendMessage(chatId, `_Searching details of ${search} on Wikipedia..._`, {parse_mode: 'Markdown'})
+        .then(function(msg) {
+        var res = JSON.parse(body);
+          // bot.sendMessage(chatId, body.query.pages);
+        
+        // console.log(res);
+        console.log(res.query.pages);
       })
     }
   })
