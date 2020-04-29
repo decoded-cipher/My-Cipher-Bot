@@ -10,18 +10,20 @@ const firebase = require('firebase');
 
 // Bot config
 const token = '1060187211:AAG4N-2oGbyLQRf-VPPJ2sOIXhOKRyyv25M';
-const bot = new TelegramBot(token, {polling: true});
+const bot = new TelegramBot(token, {
+  polling: true
+});
 
 // Init Firebase
 const app = firebase.initializeApp({
-    apiKey: "AIzaSyB28S5IBW23PntFWynQqB33ZzGkzQnf9mI",
-    authDomain: "my-cipher-bot.firebaseapp.com",
-    databaseURL: "https://my-cipher-bot.firebaseio.com",
-    projectId: "my-cipher-bot",
-    storageBucket: "my-cipher-bot.appspot.com",
-    messagingSenderId: "160844162176",
-    appId: "1:160844162176:web:22f27f0f24d71bf50bb265",
-    measurementId: "G-R7KLMTPJ1S"
+  apiKey: "AIzaSyB28S5IBW23PntFWynQqB33ZzGkzQnf9mI",
+  authDomain: "my-cipher-bot.firebaseapp.com",
+  databaseURL: "https://my-cipher-bot.firebaseio.com",
+  projectId: "my-cipher-bot",
+  storageBucket: "my-cipher-bot.appspot.com",
+  messagingSenderId: "160844162176",
+  appId: "1:160844162176:web:22f27f0f24d71bf50bb265",
+  measurementId: "G-R7KLMTPJ1S"
 });
 
 const ref = firebase.database().ref();
@@ -35,37 +37,37 @@ bot.onText(/\/start/, (msg, match) => {
 
   // var start = match[1];
   // console.log(start);
-  
+
   var chatId = msg.chat.id;
   if (start === undefined) {
     bot.sendMessage(
-      chatId, 'Welcome, " ' + msg.chat.first_name + ' ' + msg.chat.last_name
-      + ' " to " My Cipher Bot ",\nThe personalized Telegram Bot for self-learning and '
-      + '\nself-experimenting adventures on anything and everything, \nfor own creator " Mr. Arjun Krishna ".\n🙂'
-      );
+      chatId, 'Welcome, " ' + msg.chat.first_name + ' ' + msg.chat.last_name +
+      ' " to " My Cipher Bot ",\nThe personalized Telegram Bot for self-learning and ' +
+      '\nself-experimenting adventures on anything and everything, \nfor own creator " Mr. Arjun Krishna ".\n🙂'
+    );
     // return;
     bot.sendMessage(
       chatId, '😂 Sorry for being so official in words at the first time... 😂'
-      );
+    );
     // return;
     bot.sendMessage(
-      chatId, 'Hello ' + msg.chat.first_name + ',' + '\nMyself Cipher Bot. \nI am the personal telegram assistant of " Mr. Decoded_Cipher ".'
-        + '\nSorry, " Mr. Arjun Krishna ".'
-        + '\n\nI was built for serving purposes, that my creator finds it boring, but useful and is essential.'
-        + ' He also let me serve his friends and collegues, who may share his same feeling.'
-        + '\n\nYou can access my features by utilizing the commands listed, that precede a "/" symbol.'
-        + '\nWhat are you waiting for... \nLet us dig in...\n🙂'
-      );
+      chatId, 'Hello ' + msg.chat.first_name + ',' + '\nMyself Cipher Bot. \nI am the personal telegram assistant of " Mr. Decoded_Cipher ".' +
+      '\nSorry, " Mr. Arjun Krishna ".' +
+      '\n\nI was built for serving purposes, that my creator finds it boring, but useful and is essential.' +
+      ' He also let me serve his friends and collegues, who may share his same feeling.' +
+      '\n\nYou can access my features by utilizing the commands listed, that precede a "/" symbol.' +
+      '\nWhat are you waiting for... \nLet us dig in...\n🙂'
+    );
     // return;
     bot.sendMessage(
-      chatId, 'Let these examples guide you to use the commands effectively:'
-        + '\n\n-  /hellobot Hai - Waiting for your message\n("Hai" is any message)'
-        + '\n-  /movie Avatar - For Movie details\n("Avatar" is any movie name)'
-        + '\n-  /weather Kottayam - For weather updation\n("Kottayam" is any main location)'
-        + '\n-  /news Corona - For top-headlines\n("Corona" is any keyword)'
-        + '\n-  /article Bitcoin - For blogs and articles\n("Bitcoin" is any keyword)'
-        + '\n-  /bookmark_url link - For saving URLs\n("link" is any valid URL)'
-      );
+      chatId, 'Let these examples guide you to use the commands effectively:' +
+      '\n\n-  /hellobot Hai - Waiting for your message\n("Hai" is any message)' +
+      '\n-  /movie Avatar - For Movie details\n("Avatar" is any movie name)' +
+      '\n-  /weather Kottayam - For weather updation\n("Kottayam" is any main location)' +
+      '\n-  /news Corona - For top-headlines\n("Corona" is any keyword)' +
+      '\n-  /article Bitcoin - For blogs and articles\n("Bitcoin" is any keyword)' +
+      '\n-  /bookmark_url link - For saving URLs\n("link" is any valid URL)'
+    );
     return;
   }
 });
@@ -73,8 +75,8 @@ bot.onText(/\/start/, (msg, match) => {
 
 
 // Reply to /hellobot
-bot.onText(/\/hellobot (.+)/, (msg, match) => {  
-bot.sendMessage(msg.chat.id, 'Ahoy Pirate. Its me, your Cipher Bot. Thanks for your call. But, dont disturb me for an hour or so. Let me have a nap. Im feeling so sleepy. Bye.');
+bot.onText(/\/hellobot (.+)/, (msg, match) => {
+  bot.sendMessage(msg.chat.id, 'Ahoy Pirate. Its me, your Cipher Bot. Thanks for your call. But, dont disturb me for an hour or so. Let me have a nap. Im feeling so sleepy. Bye.');
 });
 
 
@@ -83,33 +85,34 @@ bot.sendMessage(msg.chat.id, 'Ahoy Pirate. Its me, your Cipher Bot. Thanks for y
 let siteUrl;
 bot.onText(/\/bookmark_url (.+)/, (msg, match) => {
   siteUrl = match[1];
-  bot.sendMessage(msg.chat.id,'Got it ' +msg.chat.first_name + ', Just specify the category?', {
+  bot.sendMessage(msg.chat.id, 'Got it ' + msg.chat.first_name + ', Just specify the category?', {
     reply_markup: {
-      inline_keyboard: [[
-        {
+      inline_keyboard: [
+        [{
           text: 'HTML/CSS',
           callback_data: 'HTML/CSS'
-        },{
+        }, {
           text: 'JavaScript',
           callback_data: 'JavaScript'
-        },{
-            text: 'PHP',
-            callback_data: 'PHP'
+        }, {
+          text: 'PHP',
+          callback_data: 'PHP'
         }],
         [{
-            text: 'Node.js',
-            callback_data: 'Node.js'
-        },{
-            text: 'Vue.js',
-            callback_data: 'Vue.js'
-        },{
-            text: 'IoT',
-            callback_data: 'IoT'
+          text: 'Node.js',
+          callback_data: 'Node.js'
+        }, {
+          text: 'Vue.js',
+          callback_data: 'Vue.js'
+        }, {
+          text: 'IoT',
+          callback_data: 'IoT'
         }],
         [{
-        text: 'Others',
-        callback_data: 'Others'
-        }]]
+          text: 'Others',
+          callback_data: 'Others'
+        }]
+      ]
     }
   });
 });
@@ -118,8 +121,10 @@ bot.onText(/\/bookmark_url (.+)/, (msg, match) => {
 bot.on("callback_query", (callbackQuery) => {
   const message = callbackQuery.message;
   // Scrap OG date
-  ogs({'url': siteUrl}, function (error, results) {
-    if(results.success) {
+  ogs({
+    'url': siteUrl
+  }, function (error, results) {
+    if (results.success) {
       // Push to Firebase
       sitesRef.push().set({
         name: results.data.ogSiteName,
@@ -130,14 +135,14 @@ bot.on("callback_query", (callbackQuery) => {
         category: callbackQuery.data
       });
       // Reply 
-      bot.sendMessage(message.chat.id,'Added \"' + results.data.ogTitle +'\" to category \"' + callbackQuery.data + '\"!');
+      bot.sendMessage(message.chat.id, 'Added \"' + results.data.ogTitle + '\" to category \"' + callbackQuery.data + '\"!');
     } else {
       // Push to Firebase
       sitesRef.push().set({
         url: siteUrl
       });
       // Reply 
-      bot.sendMessage(message.chat.id, message.chat.first_name +', I think, you added something crazy. Just review your entry mahn...!');
+      bot.sendMessage(message.chat.id, message.chat.first_name + ', I think, you added something crazy. Just review your entry mahn...!');
     }
   });
 });
@@ -148,45 +153,47 @@ bot.on("callback_query", (callbackQuery) => {
 bot.onText(/\/movie (.+)/, (msg, match) => {
   var movie = match[1];
   var chatId = msg.chat.id;
-  request(`http://www.omdbapi.com/?apikey=82043cb7&t=${movie}`,function(error,response,body) {
-    if(!error && response.statusCode == 200) {
-      bot.sendMessage(chatId, '_Looking for _' + movie + '...', {parse_mode: 'Markdown'})
-     
-      // bot.sendMessage(chatId, 'Result:\n' + body)
-
-      .then(function(msg) {
-        var res = JSON.parse(body);
-
-        // console.log(res);
-        
-        // bot.sendMessage(chatId, 
-        //   'Result: \nTitle: ' + res.Title + 
-        //   '\nYear: ' + res.Year + 
-        //   '\nRated: ' + res.Rated + 
-        //   '\nReleased: ' + res.Released + 
-        //   '\nRuntime: ' + res.Runtime + 
-        //   '\nGenre: ' + res.Genre + 
-        //   '\nDirector: ' + res.Director +
-        //   '\nBoxOffice: ' + res.BoxOffice +
-        //   '\nAwards:  ' + res.Awards
-        // );
-      
-//-----------------------------------------------------------------------------------------------------------------------------------
-
-        bot.sendPhoto(chatId, res.Poster,{caption: 
-          'Result: \nTitle: ' + res.Title + 
-          '\nYear:  ' + res.Year + 
-          '\nRated:  ' + res.Rated + 
-          '\nReleased:  ' + res.Released + 
-          '\nRuntime:  ' + res.Runtime + 
-          '\nGenre:  ' + res.Genre + 
-          '\nLanguage:  ' + res.Language + 
-          '\nDirector:  ' + res.Director +
-          '\nBoxOffice:  ' + res.BoxOffice + 
-          '\nProduction:  ' + res.Production +
-          '\nAwards:  ' + res.Awards
+  request(`http://www.omdbapi.com/?apikey=82043cb7&t=${movie}`, function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+      bot.sendMessage(chatId, '_Looking for _' + movie + '...', {
+          parse_mode: 'Markdown'
         })
-      })
+
+        // bot.sendMessage(chatId, 'Result:\n' + body)
+
+        .then(function (msg) {
+          var res = JSON.parse(body);
+
+          // console.log(res);
+
+          // bot.sendMessage(chatId, 
+          //   'Result: \nTitle: ' + res.Title + 
+          //   '\nYear: ' + res.Year + 
+          //   '\nRated: ' + res.Rated + 
+          //   '\nReleased: ' + res.Released + 
+          //   '\nRuntime: ' + res.Runtime + 
+          //   '\nGenre: ' + res.Genre + 
+          //   '\nDirector: ' + res.Director +
+          //   '\nBoxOffice: ' + res.BoxOffice +
+          //   '\nAwards:  ' + res.Awards
+          // );
+
+          //-----------------------------------------------------------------------------------------------------------------------------------
+
+          bot.sendPhoto(chatId, res.Poster, {
+            caption: 'Result: \nTitle: ' + res.Title +
+              '\nYear:  ' + res.Year +
+              '\nRated:  ' + res.Rated +
+              '\nReleased:  ' + res.Released +
+              '\nRuntime:  ' + res.Runtime +
+              '\nGenre:  ' + res.Genre +
+              '\nLanguage:  ' + res.Language +
+              '\nDirector:  ' + res.Director +
+              '\nBoxOffice:  ' + res.BoxOffice +
+              '\nProduction:  ' + res.Production +
+              '\nAwards:  ' + res.Awards
+          })
+        })
     }
   });
 });
@@ -198,63 +205,65 @@ bot.onText(/\/weather (.+)/, (msg, match) => {
   var weather = match[1];
   var chatId = msg.chat.id;
 
-  request(`https://api.openweathermap.org/data/2.5/weather?appid=2bcb097bf4c56ac64396c9db27e959e6&q=${weather}`,function(error,response,body) {
-    if(!error && response.statusCode == 200) {
-      bot.sendMessage(chatId, `_Fetching weather details from ${weather}..._`, {parse_mode: 'Markdown'})
-      .then(function(msg) {
-      var res = JSON.parse(body);
+  request(`https://api.openweathermap.org/data/2.5/weather?appid=2bcb097bf4c56ac64396c9db27e959e6&q=${weather}`, function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+      bot.sendMessage(chatId, `_Fetching weather details from ${weather}..._`, {
+          parse_mode: 'Markdown'
+        })
+        .then(function (msg) {
+          var res = JSON.parse(body);
 
-      // console.log(res);
+          // console.log(res);
 
-      // bot.sendMessage(chatId, 'Result:\n' + body);
-      // var icon_url = `http://openweathermap.org/img/wn/${res.weather[0].icon}@2x.png`;
-      
-      var temperature = res.main.temp - 273.15;
-      var sky, clouds = res.clouds.all;
+          // bot.sendMessage(chatId, 'Result:\n' + body);
+          // var icon_url = `http://openweathermap.org/img/wn/${res.weather[0].icon}@2x.png`;
 
-      if(clouds >= 0 && clouds <= 10)
-        sky = 'Clear Sky';
-      else if(clouds >= 11 & clouds <= 25)
-        sky = 'Few Clouds';
-      else if(clouds >= 26 & clouds <= 50)
-        sky = 'Scattered Clouds';
-      else if(clouds >= 51 & clouds <= 84)
-        sky = 'Broken Clouds';
-      else
-        sky = 'Overcast Clouds';
+          var temperature = res.main.temp - 273.15;
+          var sky, clouds = res.clouds.all;
 
-      var sec = res.dt;
-      var date = new Date(sec * 1000);
-      var presentTime = date.toLocaleTimeString();
-      // console.log(date);
+          if (clouds >= 0 && clouds <= 10)
+            sky = 'Clear Sky';
+          else if (clouds >= 11 & clouds <= 25)
+            sky = 'Few Clouds';
+          else if (clouds >= 26 & clouds <= 50)
+            sky = 'Scattered Clouds';
+          else if (clouds >= 51 & clouds <= 84)
+            sky = 'Broken Clouds';
+          else
+            sky = 'Overcast Clouds';
 
-      var sec = res.sys.sunrise;
-      var date = new Date(sec * 1000);
-      var sunrise = date.toLocaleTimeString();
-      // console.log(sunrise);
+          var sec = res.dt;
+          var date = new Date(sec * 1000);
+          var presentTime = date.toLocaleTimeString();
+          // console.log(date);
 
-      var sec = res.sys.sunset;
-      var date = new Date(sec * 1000);
-      var sunset = date.toLocaleTimeString();
-      // console.log(sunset);
-      
-        bot.sendMessage(chatId,
-        // bot.sendPhoto(chatId, icon_url,{caption:  
-          'Result : \nCity :  ' + res.name + ', ' + res.sys.country +
-          // '\nCoordinates:'   + res.name + ', ' + res.sys.country +
-          '\n\nTime (IST) :  ' + presentTime +
-          '\nAtmosphere :  ' + res.weather[0].main +
-          '\nCloudliness :  ' + sky +
-          '\nTemperature :  ' + temperature + '°C' +
-          '\nHumidity :  ' + res.main.humidity + ' %' + 
-          '\nPressure :  ' + res.main.pressure + ' hPa' +
-          '\nWind :  ' + res.wind.speed + ' m/s ' + '| Angle :  ' + res.wind.deg + '°' +
-          '\n\nSunrise :  ' + sunrise + 
-          '\nSunset :  ' + sunset +
-          '\n\nLatitude :  ' + res.coord.lat + '\nLongitude :  ' + res.coord.lon
-        // }
-        );
-      })
+          var sec = res.sys.sunrise;
+          var date = new Date(sec * 1000);
+          var sunrise = date.toLocaleTimeString();
+          // console.log(sunrise);
+
+          var sec = res.sys.sunset;
+          var date = new Date(sec * 1000);
+          var sunset = date.toLocaleTimeString();
+          // console.log(sunset);
+
+          bot.sendMessage(chatId,
+            // bot.sendPhoto(chatId, icon_url,{caption:  
+            'Result : \nCity :  ' + res.name + ', ' + res.sys.country +
+            // '\nCoordinates:'   + res.name + ', ' + res.sys.country +
+            '\n\nTime (IST) :  ' + presentTime +
+            '\nAtmosphere :  ' + res.weather[0].main +
+            '\nCloudliness :  ' + sky +
+            '\nTemperature :  ' + temperature + '°C' +
+            '\nHumidity :  ' + res.main.humidity + ' %' +
+            '\nPressure :  ' + res.main.pressure + ' hPa' +
+            '\nWind :  ' + res.wind.speed + ' m/s ' + '| Angle :  ' + res.wind.deg + '°' +
+            '\n\nSunrise :  ' + sunrise +
+            '\nSunset :  ' + sunset +
+            '\n\nLatitude :  ' + res.coord.lat + '\nLongitude :  ' + res.coord.lon
+            // }
+          );
+        })
     }
   })
 })
@@ -266,71 +275,73 @@ bot.onText(/\/news (.+)/, (msg, match) => {
   var news = match[1];
   var chatId = msg.chat.id;
 
-// bot.sendMessage(msg.chat.id,'Got it Arjun, Just specify the category?', {
-//   reply_markup: {
-//     inline_keyboard: [[
-//       {
-//         text: 'Top Headlines',
-//         callback_data: 'top-headlines'
-//       },{
-//         text: 'Articles',
-//         callback_data: 'everything'
-//       }]]
-//   }
-// });
+  // bot.sendMessage(msg.chat.id,'Got it Arjun, Just specify the category?', {
+  //   reply_markup: {
+  //     inline_keyboard: [[
+  //       {
+  //         text: 'Top Headlines',
+  //         callback_data: 'top-headlines'
+  //       },{
+  //         text: 'Articles',
+  //         callback_data: 'everything'
+  //       }]]
+  //   }
+  // });
 
-// // Callback query
-// bot.on("callback_query", (callbackQuery) => {
-//   const message = callbackQuery.message;
-//   bot.answerCallbackQuery(callbackQuery.id)
-//     .then(() => 
-//     bot.sendMessage(message.chat.id, "You clicked " + callbackQuery.data + ""));
-//     request(`http://newsapi.org/v2/${callbackQuery.data}?q=${news}&apiKey=4a0bb231b1db4357b1278797ebc07943&country=in`,function(error,response,body) {
-//     if(!error && response.statusCode == 200) {  
-//       var res = JSON.parse(body);
-//       console.log(res);
-//     }
-// });
+  // // Callback query
+  // bot.on("callback_query", (callbackQuery) => {
+  //   const message = callbackQuery.message;
+  //   bot.answerCallbackQuery(callbackQuery.id)
+  //     .then(() => 
+  //     bot.sendMessage(message.chat.id, "You clicked " + callbackQuery.data + ""));
+  //     request(`http://newsapi.org/v2/${callbackQuery.data}?q=${news}&apiKey=4a0bb231b1db4357b1278797ebc07943&country=in`,function(error,response,body) {
+  //     if(!error && response.statusCode == 200) {  
+  //       var res = JSON.parse(body);
+  //       console.log(res);
+  //     }
+  // });
 
   // request(`http://newsapi.org/v2/top-headlines?q=${news}&apiKey=4a0bb231b1db4357b1278797ebc07943&pageSize=2&country=in&page=1`,function(error,response,body) {
 
-  request(`http://newsapi.org/v2/top-headlines?q=${news}&apiKey=4a0bb231b1db4357b1278797ebc07943&country=in`,function(error,response,body) {
-    if(!error && response.statusCode == 200) {
-        bot.sendMessage(chatId, `_Fetching today's headlines on ${news}..._`, {parse_mode: 'Markdown'})
-        .then(function(msg) {
-        var res = JSON.parse(body);
+  request(`http://newsapi.org/v2/top-headlines?q=${news}&apiKey=4a0bb231b1db4357b1278797ebc07943&country=in`, function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+      bot.sendMessage(chatId, `_Fetching today's headlines on ${news}..._`, {
+          parse_mode: 'Markdown'
+        })
+        .then(function (msg) {
+          var res = JSON.parse(body);
 
-        // console.log(res);
-        // bot.sendMessage(chatId, 'Result:\n' + body);
+          // console.log(res);
+          // bot.sendMessage(chatId, 'Result:\n' + body);
 
-        // bot.sendMessage(chatId,
-        //   'Author :  ' + res.articles[0].author + '\n' +
-        //   'Published At :  ' + res.articles[0].publishedAt + '\n\n' +
-        //   res.articles[0].title + '\n\n' + res.articles[0].description + '\n\n' + res.articles[0].url +
-        //   '\n\n' + res.articles[0].content
-        // )
+          // bot.sendMessage(chatId,
+          //   'Author :  ' + res.articles[0].author + '\n' +
+          //   'Published At :  ' + res.articles[0].publishedAt + '\n\n' +
+          //   res.articles[0].title + '\n\n' + res.articles[0].description + '\n\n' + res.articles[0].url +
+          //   '\n\n' + res.articles[0].content
+          // )
 
-        for (var result = 1; result <= res.totalResults; result++) {
-          
-          var d = new Date(res.articles[result-1].publishedAt);
-          var presentTime = d.toLocaleTimeString();
-          var presentDate = d.toLocaleDateString();
+          for (var result = 1; result <= res.totalResults; result++) {
 
-          // console.log(presentTime);
-          // console.log(presentDate);
-          // console.log(d);
-          
-          bot.sendMessage(chatId,
-            'Source :  ' + res.articles[result-1].source.name + '\n' +
-            'Author:  '  + res.articles[result-1].author + '\n' +
-            'Published At :  ' + presentDate + ', ' + presentTime + '\n\n' +
-            res.articles[result-1].title + '\n\n' +
-            res.articles[result-1].description + '\n\n' +
-            res.articles[result-1].content + '\n\n' +
-            'Link :\n' + res.articles[result-1].url
-          )
-        }
-      })
+            var d = new Date(res.articles[result - 1].publishedAt);
+            var presentTime = d.toLocaleTimeString();
+            var presentDate = d.toLocaleDateString();
+
+            // console.log(presentTime);
+            // console.log(presentDate);
+            // console.log(d);
+
+            bot.sendMessage(chatId,
+              'Source :  ' + res.articles[result - 1].source.name + '\n' +
+              'Author:  ' + res.articles[result - 1].author + '\n' +
+              'Published At :  ' + presentDate + ', ' + presentTime + '\n\n' +
+              res.articles[result - 1].title + '\n\n' +
+              res.articles[result - 1].description + '\n\n' +
+              res.articles[result - 1].content + '\n\n' +
+              'Link :\n' + res.articles[result - 1].url
+            )
+          }
+        })
     }
   })
 })
@@ -342,31 +353,33 @@ bot.onText(/\/articles (.+)/, (msg, match) => {
   var article = match[1];
   var chatId = msg.chat.id;
 
-  request(`http://newsapi.org/v2/everything?q=${article}&apiKey=4a0bb231b1db4357b1278797ebc07943`,function(error,response,body) {
-    if(!error && response.statusCode == 200) {
-        bot.sendMessage(chatId, `_Fetching recent articles on ${article}..._`, {parse_mode: 'Markdown'})
-        .then(function(msg) {
-        var res = JSON.parse(body);
+  request(`http://newsapi.org/v2/everything?q=${article}&apiKey=4a0bb231b1db4357b1278797ebc07943`, function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+      bot.sendMessage(chatId, `_Fetching recent articles on ${article}..._`, {
+          parse_mode: 'Markdown'
+        })
+        .then(function (msg) {
+          var res = JSON.parse(body);
 
-        // console.log(res);
+          // console.log(res);
 
-        for (var result = 1; result <= res.totalResults; result++) {
+          for (var result = 1; result <= res.totalResults; result++) {
 
-          var d = new Date(res.articles[result-1].publishedAt);
-          var presentTime = d.toLocaleTimeString();
-          var presentDate = d.toLocaleDateString();
+            var d = new Date(res.articles[result - 1].publishedAt);
+            var presentTime = d.toLocaleTimeString();
+            var presentDate = d.toLocaleDateString();
 
-          bot.sendMessage(chatId,
-            'Source :  ' + res.articles[result-1].source.name + '\n' +
-            'Author:  '  + res.articles[result-1].author + '\n' +
-            'Published At :  ' + presentDate + ', ' + presentTime + '\n\n' +
-            res.articles[result-1].title + '\n\n' +
-            res.articles[result-1].description + '\n\n' +
-            res.articles[result-1].content + '\n\n' +
-            'Link :\n' + res.articles[result-1].url
-          )
-        }
-      })
+            bot.sendMessage(chatId,
+              'Source :  ' + res.articles[result - 1].source.name + '\n' +
+              'Author:  ' + res.articles[result - 1].author + '\n' +
+              'Published At :  ' + presentDate + ', ' + presentTime + '\n\n' +
+              res.articles[result - 1].title + '\n\n' +
+              res.articles[result - 1].description + '\n\n' +
+              res.articles[result - 1].content + '\n\n' +
+              'Link :\n' + res.articles[result - 1].url
+            )
+          }
+        })
     }
   })
 })
@@ -388,16 +401,41 @@ bot.onText(/\/search (.+)/, (msg, match) => {
 
   console.log(search);
 
-  request(`https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&titles=${search}`,function(error, response, body) {
-    if(!error && response.statusCode == 200) {
-        bot.sendMessage(chatId, `_Searching details of ${search} on Wikipedia..._`, {parse_mode: 'Markdown'})
-        .then(function(msg) {
-        var res = JSON.parse(body);
+  request(`https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&titles=${search}`, function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+      bot.sendMessage(chatId, `_Searching details of ${search} on Wikipedia..._`, {
+          parse_mode: 'Markdown'
+        })
+        .then(function (msg) {
+          var res = JSON.parse(body);
           // bot.sendMessage(chatId, body.query.pages);
-        
-        // console.log(res);
-        console.log(res.query.pages);
-      })
+
+          // console.log(res);
+          console.log(res.query.pages);
+        })
     }
   })
 })
+
+
+// Reply to /movie
+bot.onText(/\/corona/, (msg, match) => {
+  const corona = match.input.split(' ')[1];
+  var chatId = msg.chat.id;
+  if (corona === undefined) {
+    request(`https://thevirustracker.com/free-api?global=stats`, function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+
+        // console.log(response);
+
+        bot.sendMessage(chatId, '_Looking for _' + 'COVID updates around the globe' + '...', {
+            parse_mode: 'Markdown'
+          })
+          .then(function (msg) {
+            var res = JSON.parse(body);
+            console.log(res)
+          })
+      }
+    });
+  }
+});
