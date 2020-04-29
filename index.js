@@ -82,70 +82,70 @@ bot.onText(/\/hellobot (.+)/, (msg, match) => {
 
 
 // Reply to /bookmark
-let siteUrl;
-bot.onText(/\/bookmark_url (.+)/, (msg, match) => {
-  siteUrl = match[1];
-  bot.sendMessage(msg.chat.id, 'Got it ' + msg.chat.first_name + ', Just specify the category?', {
-    reply_markup: {
-      inline_keyboard: [
-        [{
-          text: 'HTML/CSS',
-          callback_data: 'HTML/CSS'
-        }, {
-          text: 'JavaScript',
-          callback_data: 'JavaScript'
-        }, {
-          text: 'PHP',
-          callback_data: 'PHP'
-        }],
-        [{
-          text: 'Node.js',
-          callback_data: 'Node.js'
-        }, {
-          text: 'Vue.js',
-          callback_data: 'Vue.js'
-        }, {
-          text: 'IoT',
-          callback_data: 'IoT'
-        }],
-        [{
-          text: 'Others',
-          callback_data: 'Others'
-        }]
-      ]
-    }
-  });
-});
+// let siteUrl;
+// bot.onText(/\/bookmark_url (.+)/, (msg, match) => {
+//   siteUrl = match[1];
+//   bot.sendMessage(msg.chat.id, 'Got it ' + msg.chat.first_name + ', Just specify the category?', {
+//     reply_markup: {
+//       inline_keyboard: [
+//         [{
+//           text: 'HTML/CSS',
+//           callback_data: 'HTML/CSS'
+//         }, {
+//           text: 'JavaScript',
+//           callback_data: 'JavaScript'
+//         }, {
+//           text: 'PHP',
+//           callback_data: 'PHP'
+//         }],
+//         [{
+//           text: 'Node.js',
+//           callback_data: 'Node.js'
+//         }, {
+//           text: 'Vue.js',
+//           callback_data: 'Vue.js'
+//         }, {
+//           text: 'IoT',
+//           callback_data: 'IoT'
+//         }],
+//         [{
+//           text: 'Others',
+//           callback_data: 'Others'
+//         }]
+//       ]
+//     }
+//   });
+// });
 
-// Callback query
-bot.on("callback_query", (callbackQuery) => {
-  const message = callbackQuery.message;
-  // Scrap OG date
-  ogs({
-    'url': siteUrl
-  }, function (error, results) {
-    if (results.success) {
-      // Push to Firebase
-      sitesRef.push().set({
-        name: results.data.ogSiteName,
-        title: results.data.ogTitle,
-        description: results.data.ogDescription,
-        url: siteUrl,
-        thumbnail: results.data.ogImage.url,
-        category: callbackQuery.data
-      });
-      // Reply 
-      bot.sendMessage(message.chat.id, 'Added \"' + results.data.ogTitle + '\" to category \"' + callbackQuery.data + '\"!');
-    } else {
-      // Push to Firebase
-      sitesRef.push().set({
-        url: siteUrl
-      });
-      // Reply 
-      bot.sendMessage(message.chat.id, message.chat.first_name + ', I think, you added something crazy. Just review your entry mahn...!');
-    }
-  });
-});
+// // Callback query
+// bot.on("callback_query", (callbackQuery) => {
+//   const message = callbackQuery.message;
+//   // Scrap OG date
+//   ogs({
+//     'url': siteUrl
+//   }, function (error, results) {
+//     if (results.success) {
+//       // Push to Firebase
+//       sitesRef.push().set({
+//         name: results.data.ogSiteName,
+//         title: results.data.ogTitle,
+//         description: results.data.ogDescription,
+//         url: siteUrl,
+//         thumbnail: results.data.ogImage.url,
+//         category: callbackQuery.data
+//       });
+//       // Reply 
+//       bot.sendMessage(message.chat.id, 'Added \"' + results.data.ogTitle + '\" to category \"' + callbackQuery.data + '\"!');
+//     } else {
+//       // Push to Firebase
+//       sitesRef.push().set({
+//         url: siteUrl
+//       });
+//       // Reply 
+//       bot.sendMessage(message.chat.id, message.chat.first_name + ', I think, you added something crazy. Just review your entry mahn...!');
+//     }
+//   });
+// });
 
 
 
@@ -423,19 +423,83 @@ bot.onText(/\/corona/, (msg, match) => {
   const corona = match.input.split(' ')[1];
   var chatId = msg.chat.id;
   if (corona === undefined) {
+
+    bot.sendMessage(msg.chat.id, 'Got it ' + msg.chat.first_name + ', What you want to know...?', {
+      reply_markup: {
+        inline_keyboard: [
+          [{
+            text: 'Global Status',
+            callback_data: 'global'
+          }, {
+            text: 'National Status',
+            callback_data: 'national'
+          }]
+        ]
+      }
+    });
+
+  }
+});
+
+
+bot.on("callback_query", (callback_Query) => {
+  const message = callback_Query.message;
+  if (callback_Query.data == 'global') {
+    // console.log('Global');
+
     request(`https://thevirustracker.com/free-api?global=stats`, function (error, response, body) {
       if (!error && response.statusCode == 200) {
-
-        // console.log(response);
-
-        bot.sendMessage(chatId, '_Looking for _' + 'COVID updates around the globe' + '...', {
+        bot.sendMessage(message.chat.id, '_Looking for _' + '_covid updates around the globe_' + '...', {
             parse_mode: 'Markdown'
           })
           .then(function (msg) {
             var res = JSON.parse(body);
             console.log(res)
+            // console.log(res.results[0].total_new_cases_today)
+
+            bot.sendMessage(message.chat.id,
+              'Result:\nTotal Affected Countries :  ' + res.results[0].total_affected_countries +
+              '\n\nNew Cases Today :  ' + res.results[0].total_new_cases_today +
+              '\nNew Deaths Today :  ' + res.results[0].total_new_deaths_today +
+              '\n\nTotal Active Cases :  ' + res.results[0].total_active_cases +
+              '\nTotal Serious Cases :  ' + res.results[0].total_serious_cases +
+              '\nTotal Deaths :  ' + res.results[0].total_cases
+            )    
+
           })
+
       }
     });
+
+  } else {
+
+    request(`https://thevirustracker.com/free-api?countryTimeline=IN`, function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+        bot.sendMessage(message.chat.id, '_Looking for _' + '_covid updates around the globe_' + '...', {
+            parse_mode: 'Markdown'
+          })
+          .then(function (msg) {
+            var res = JSON.parse(body);
+            console.log(res.timelineitems[0]);
+
+            // for (var result = 1; result <= res.totalResults; result++) {
+            //   console.log(res.timelineitems[0].object[result]);
+            // }
+
+          })
+        }
+      });
+
   }
+  return;
 });
+
+// function ObjectLength( object ) {
+//   var length = 0;
+//   for( var key in object ) {
+//       if( object.hasOwnProperty(key) ) {
+//           ++length;
+//       }
+//   }
+//   return length;
+// };
