@@ -11,7 +11,9 @@
   "dependencies": {
     "firebase": "^7.13.0",
     "newsapi": "^2.4.0",
-    "node-telegram-bot-api": "^0.40.0",
-    "open-graph-scraper": "^3.6.2"
+    "node-telegram-bot-api": "^0.40.0"
+  },
+  "devDependencies": {
+    "dotenv": "^8.2.0"
   }
 }

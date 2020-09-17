@@ -1,35 +1,16 @@
 var PORT = process.env.PORT || 3000;
 
+require('dotenv').config()
 process.env.NTBA_FIX_319 = 1;
 
 var request = require('request');
-
 const TelegramBot = require('node-telegram-bot-api');
-const ogs = require('open-graph-scraper');
-const firebase = require('firebase');
 
 // Bot config
-const token = '1060187211:AAG4N-2oGbyLQRf-VPPJ2sOIXhOKRyyv25M';
+const token = process.env.BOT_TOKEN;
 const bot = new TelegramBot(token, {
   polling: true
 });
-
-// Init Firebase
-const app = firebase.initializeApp({
-  apiKey: "AIzaSyB28S5IBW23PntFWynQqB33ZzGkzQnf9mI",
-  authDomain: "my-cipher-bot.firebaseapp.com",
-  databaseURL: "https://my-cipher-bot.firebaseio.com",
-  projectId: "my-cipher-bot",
-  storageBucket: "my-cipher-bot.appspot.com",
-  messagingSenderId: "160844162176",
-  appId: "1:160844162176:web:22f27f0f24d71bf50bb265",
-  measurementId: "G-R7KLMTPJ1S"
-});
-
-const ref = firebase.database().ref();
-const sitesRef = ref.child("sites");
-
-
 
 // Reply to /start
 bot.onText(/\/start/, (msg, match) => {
@@ -46,28 +27,43 @@ bot.onText(/\/start/, (msg, match) => {
       '\nself-experimenting adventures on anything and everything, \nfor own creator " Mr. Arjun Krishna ".\n🙂'
     );
     // return;
-    bot.sendMessage(
-      chatId, '😂 Sorry for being so official in words at the first time... 😂'
-    );
+
+    setTimeout(() => {
+      bot.sendMessage(
+        chatId, '😂 Sorry for being so official in words at the first time... 😂'
+      );
+    }, 1000);
     // return;
-    bot.sendMessage(
-      chatId, 'Hello ' + msg.chat.first_name + ',' + '\nMyself Cipher Bot. \nI am the personal telegram assistant of " Mr. Decoded_Cipher ".' +
-      '\nSorry, " Mr. Arjun Krishna ".' +
-      '\n\nI was built for serving purposes, that my creator finds it boring, but useful and is essential.' +
-      ' He also let me serve his friends and collegues, who may share his same feeling.' +
-      '\n\nYou can access my features by utilizing the commands listed, that precede a "/" symbol.' +
-      '\nWhat are you waiting for... \nLet us dig in...\n🙂'
-    );
+
+    setTimeout(() => {
+      bot.sendMessage(
+        chatId, 'Hello ' + msg.chat.first_name + ',' + '\nMyself Cipher Bot. \nI am the personal telegram assistant of " Mr. Decoded_Cipher ".' +
+        '\nSorry, " Mr. Arjun Krishna ".' +
+        '\n\nI was built for serving purposes, that my creator finds it boring, but useful and is essential.' +
+        ' He also let me serve his friends and collegues, who may share his same feeling.' +
+        '\n\nYou can access my features by utilizing the commands listed, that precede a "/" symbol.' +
+        '\nWhat are you waiting for... \nLet us dig in...\n🙂'
+      );
+    }, 1000);
     // return;
-    bot.sendMessage(
-      chatId, 'Let these examples guide you to use the commands effectively:' +
-      '\n\n-  /hellobot Hai - Waiting for your message\n("Hai" is any message)' +
-      '\n-  /movie Avatar - For Movie details\n("Avatar" is any movie name)' +
-      '\n-  /weather Kottayam - For weather updation\n("Kottayam" is any main location)' +
-      '\n-  /news Corona - For top-headlines\n("Corona" is any keyword)' +
-      '\n-  /article Bitcoin - For blogs and articles\n("Bitcoin" is any keyword)' +
-      '\n-  /bookmark_url link - For saving URLs\n("link" is any valid URL)'
-    );
+
+    setTimeout(() => {
+      bot.sendMessage(
+        chatId, 'Let these examples guide you to use the commands effectively:' +
+        '\n\n-  /hellobot Hai - Waiting for your message\n("Hai" is any message)' +
+        '\n-  /movie Avatar - For Movie details\n("Avatar" is any movie name)' +
+        '\n-  /article Bitcoin - For blogs and articles\n("Bitcoin" is any keyword)' +
+        '\n-  /news Covid - For daily news updations\n("Covid" is any news keyword)' +
+        '\n-  /weather Kottayam - For weather updation\n("Kottayam" is any main location)'
+      );
+    }, 1000);
+    // return;
+
+    setTimeout(() => {
+      bot.sendMessage(
+        chatId, 'Hey, What are you waiting for... \n Just try something...'
+      );
+    }, 1000);
     return;
   }
 });
@@ -78,74 +74,6 @@ bot.onText(/\/start/, (msg, match) => {
 bot.onText(/\/hellobot (.+)/, (msg, match) => {
   bot.sendMessage(msg.chat.id, 'Ahoy Pirate. Its me, your Cipher Bot. Thanks for your call. But, dont disturb me for an hour or so. Let me have a nap. Im feeling so sleepy. Bye.');
 });
-
-
-
-// Reply to /bookmark
-// let siteUrl;
-// bot.onText(/\/bookmark_url (.+)/, (msg, match) => {
-//   siteUrl = match[1];
-//   bot.sendMessage(msg.chat.id, 'Got it ' + msg.chat.first_name + ', Just specify the category?', {
-//     reply_markup: {
-//       inline_keyboard: [
-//         [{
-//           text: 'HTML/CSS',
-//           callback_data: 'HTML/CSS'
-//         }, {
-//           text: 'JavaScript',
-//           callback_data: 'JavaScript'
-//         }, {
-//           text: 'PHP',
-//           callback_data: 'PHP'
-//         }],
-//         [{
-//           text: 'Node.js',
-//           callback_data: 'Node.js'
-//         }, {
-//           text: 'Vue.js',
-//           callback_data: 'Vue.js'
-//         }, {
-//           text: 'IoT',
-//           callback_data: 'IoT'
-//         }],
-//         [{
-//           text: 'Others',
-//           callback_data: 'Others'
-//         }]
-//       ]
-//     }
-//   });
-// });
-
-// // Callback query
-// bot.on("callback_query", (callbackQuery) => {
-//   const message = callbackQuery.message;
-//   // Scrap OG date
-//   ogs({
-//     'url': siteUrl
-//   }, function (error, results) {
-//     if (results.success) {
-//       // Push to Firebase
-//       sitesRef.push().set({
-//         name: results.data.ogSiteName,
-//         title: results.data.ogTitle,
-//         description: results.data.ogDescription,
-//         url: siteUrl,
-//         thumbnail: results.data.ogImage.url,
-//         category: callbackQuery.data
-//       });
-//       // Reply 
-//       bot.sendMessage(message.chat.id, 'Added \"' + results.data.ogTitle + '\" to category \"' + callbackQuery.data + '\"!');
-//     } else {
-//       // Push to Firebase
-//       sitesRef.push().set({
-//         url: siteUrl
-//       });
-//       // Reply 
-//       bot.sendMessage(message.chat.id, message.chat.first_name + ', I think, you added something crazy. Just review your entry mahn...!');
-//     }
-//   });
-// });
 
 
 
@@ -164,21 +92,7 @@ bot.onText(/\/movie (.+)/, (msg, match) => {
         .then(function (msg) {
           var res = JSON.parse(body);
 
-          console.log(res);
-
-          // bot.sendMessage(chatId, 
-          //   'Result: \nTitle: ' + res.Title + 
-          //   '\nYear: ' + res.Year + 
-          //   '\nRated: ' + res.Rated + 
-          //   '\nReleased: ' + res.Released + 
-          //   '\nRuntime: ' + res.Runtime + 
-          //   '\nGenre: ' + res.Genre + 
-          //   '\nDirector: ' + res.Director +
-          //   '\nBoxOffice: ' + res.BoxOffice +
-          //   '\nAwards:  ' + res.Awards
-          // );
-
-          //-----------------------------------------------------------------------------------------------------------------------------------
+          // console.log(res);
 
           bot.sendPhoto(chatId, res.Poster, {
             caption: 'Result: \nTitle: ' + res.Title +
@@ -205,7 +119,7 @@ bot.onText(/\/weather (.+)/, (msg, match) => {
   var weather = match[1];
   var chatId = msg.chat.id;
 
-  request(`https://api.openweathermap.org/data/2.5/weather?appid=2bcb097bf4c56ac64396c9db27e959e6&q=${weather}`, function (error, response, body) {
+  request(`https://api.openweathermap.org/data/2.5/weather?appid=${process.env.WEATHER_TOKEN}&q=${weather}`, function (error, response, body) {
     if (!error && response.statusCode == 200) {
       bot.sendMessage(chatId, `_Fetching weather details from ${weather}..._`, {
           parse_mode: 'Markdown'
@@ -213,12 +127,9 @@ bot.onText(/\/weather (.+)/, (msg, match) => {
         .then(function (msg) {
           var res = JSON.parse(body);
 
-          console.log(res);
+          // console.log(res);
 
-          // bot.sendMessage(chatId, 'Result:\n' + body);
-          // var icon_url = `http://openweathermap.org/img/wn/${res.weather[0].icon}@2x.png`;
-
-          var temperature = res.main.temp - 273.15;
+          var temperature = Math.floor(res.main.temp - 273.15);
           var sky, clouds = res.clouds.all;
 
           if (clouds >= 0 && clouds <= 10)
@@ -275,35 +186,7 @@ bot.onText(/\/news (.+)/, (msg, match) => {
   var news = match[1];
   var chatId = msg.chat.id;
 
-  // bot.sendMessage(msg.chat.id,'Got it Arjun, Just specify the category?', {
-  //   reply_markup: {
-  //     inline_keyboard: [[
-  //       {
-  //         text: 'Top Headlines',
-  //         callback_data: 'top-headlines'
-  //       },{
-  //         text: 'Articles',
-  //         callback_data: 'everything'
-  //       }]]
-  //   }
-  // });
-
-  // // Callback query
-  // bot.on("callback_query", (callbackQuery) => {
-  //   const message = callbackQuery.message;
-  //   bot.answerCallbackQuery(callbackQuery.id)
-  //     .then(() => 
-  //     bot.sendMessage(message.chat.id, "You clicked " + callbackQuery.data + ""));
-  //     request(`http://newsapi.org/v2/${callbackQuery.data}?q=${news}&apiKey=4a0bb231b1db4357b1278797ebc07943&country=in`,function(error,response,body) {
-  //     if(!error && response.statusCode == 200) {  
-  //       var res = JSON.parse(body);
-  //       console.log(res);
-  //     }
-  // });
-
-  // request(`http://newsapi.org/v2/top-headlines?q=${news}&apiKey=4a0bb231b1db4357b1278797ebc07943&pageSize=2&country=in&page=1`,function(error,response,body) {
-
-  request(`http://newsapi.org/v2/top-headlines?q=${news}&apiKey=4a0bb231b1db4357b1278797ebc07943&country=in`, function (error, response, body) {
+  request(`http://newsapi.org/v2/top-headlines?q=${news}&apiKey=${process.env.NEWS_TOKEN}&country=in`, function (error, response, body) {
     if (!error && response.statusCode == 200) {
       bot.sendMessage(chatId, `_Fetching today's headlines on ${news}..._`, {
           parse_mode: 'Markdown'
@@ -311,15 +194,7 @@ bot.onText(/\/news (.+)/, (msg, match) => {
         .then(function (msg) {
           var res = JSON.parse(body);
 
-          console.log(res);
-          // bot.sendMessage(chatId, 'Result:\n' + body);
-
-          // bot.sendMessage(chatId,
-          //   'Author :  ' + res.articles[0].author + '\n' +
-          //   'Published At :  ' + res.articles[0].publishedAt + '\n\n' +
-          //   res.articles[0].title + '\n\n' + res.articles[0].description + '\n\n' + res.articles[0].url +
-          //   '\n\n' + res.articles[0].content
-          // )
+          // console.log(res);
 
           for (var result = 1; result <= res.totalResults; result++) {
 
@@ -353,7 +228,7 @@ bot.onText(/\/articles (.+)/, (msg, match) => {
   var article = match[1];
   var chatId = msg.chat.id;
 
-  request(`http://newsapi.org/v2/everything?q=${article}&apiKey=4a0bb231b1db4357b1278797ebc07943`, function (error, response, body) {
+  request(`http://newsapi.org/v2/everything?q=${article}&apiKey=${process.env.NEWS_TOKEN}`, function (error, response, body) {
     if (!error && response.statusCode == 200) {
       bot.sendMessage(chatId, `_Fetching recent articles on ${article}..._`, {
           parse_mode: 'Markdown'
@@ -361,7 +236,7 @@ bot.onText(/\/articles (.+)/, (msg, match) => {
         .then(function (msg) {
           var res = JSON.parse(body);
 
-          console.log(res);
+          // console.log(res);
 
           for (var result = 1; result <= res.totalResults; result++) {
 
@@ -386,113 +261,107 @@ bot.onText(/\/articles (.+)/, (msg, match) => {
 
 
 
-// Reply to everything 
-// bot.on('message', function (msg) {
-//   console.log(msg);
-//   bot.sendMessage(msg.chat.id, msg.text);
+// Reply to /search
+
+// bot.onText(/\/search (.+)/, (msg, match) => {
+//   var search = match[1];
+//   var chatId = msg.chat.id;
+
+//   console.log(search);
+
+//   request(`https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&titles=${search}`, function (error, response, body) {
+//     if (!error && response.statusCode == 200) {
+//       bot.sendMessage(chatId, `_Searching details of ${search} on Wikipedia..._`, {
+//           parse_mode: 'Markdown'
+//         })
+//         .then(function (msg) {
+//           var res = JSON.parse(body);
+//           bot.sendMessage(chatId, body.query.pages);
+
+//           console.log(res);
+//           console.log(res.query.pages);
+//         })
+//     }
+//   })
+// })
+
+
+
+// Reply to /covid
+
+// bot.onText(/\/covid/, (msg, match) => {
+//   const corona = match.input.split(' ')[1];
+//   var chatId = msg.chat.id;
+//   if (corona === undefined) {
+
+//     bot.sendMessage(msg.chat.id, 'Got it ' + msg.chat.first_name + ', What you want to know...?', {
+//       reply_markup: {
+//         inline_keyboard: [
+//           [{
+//             text: 'Global Status',
+//             callback_data: 'global'
+//           }, {
+//             text: 'National Status',
+//             callback_data: 'national'
+//           }]
+//         ]
+//       }
+//     });
+
+//   }
 // });
 
+// bot.on("callback_query", (callback_Query) => {
+//   const message = callback_Query.message;
+//   if (callback_Query.data == 'global') {
+//     // console.log('Global');
 
+//     request(`https://thevirustracker.com/free-api?global=stats`, function (error, response, body) {
+//       if (!error && response.statusCode == 200) {
+//         bot.sendMessage(message.chat.id, '_Looking for _' + '_covid updates around the globe_' + '...', {
+//             parse_mode: 'Markdown'
+//           })
+//           .then(function (msg) {
+//             var res = JSON.parse(body);
+//             // console.log(res)
+//             // console.log(res.results[0].total_new_cases_today)
 
-// Reply to /search
-bot.onText(/\/search (.+)/, (msg, match) => {
-  var search = match[1];
-  var chatId = msg.chat.id;
+//             bot.sendMessage(message.chat.id,
+//               'Result:\nTotal Affected Countries :  ' + res.results[0].total_affected_countries +
+//               '\n\nNew Cases Today :  ' + res.results[0].total_new_cases_today +
+//               '\nNew Deaths Today :  ' + res.results[0].total_new_deaths_today +
+//               '\n\nTotal Active Cases :  ' + res.results[0].total_active_cases +
+//               '\nTotal Serious Cases :  ' + res.results[0].total_serious_cases +
+//               '\nTotal Deaths :  ' + res.results[0].total_cases
+//             )
 
-  console.log(search);
+//           })
 
-  request(`https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&titles=${search}`, function (error, response, body) {
-    if (!error && response.statusCode == 200) {
-      bot.sendMessage(chatId, `_Searching details of ${search} on Wikipedia..._`, {
-          parse_mode: 'Markdown'
-        })
-        .then(function (msg) {
-          var res = JSON.parse(body);
-          // bot.sendMessage(chatId, body.query.pages);
+//       }
+//     });
 
-          // console.log(res);
-          console.log(res.query.pages);
-        })
-    }
-  })
-})
+//   } else {
 
+//     request(`https://thevirustracker.com/free-api?countryTimeline=IN`, function (error, response, body) {
+//       if (!error && response.statusCode == 200) {
+//         bot.sendMessage(message.chat.id, '_Looking for _' + '_covid updates around the globe_' + '...', {
+//             parse_mode: 'Markdown'
+//           })
+//           .then(function (msg) {
+//             var res = JSON.parse(body);
+//             console.log(res.timelineitems[0]);
 
-// Reply to /movie
-bot.onText(/\/corona/, (msg, match) => {
-  const corona = match.input.split(' ')[1];
-  var chatId = msg.chat.id;
-  if (corona === undefined) {
+//             // for (var result = 1; result <= res.totalResults; result++) {
+//             //   console.log(res.timelineitems[0].object[result]);
+//             // }
 
-    bot.sendMessage(msg.chat.id, 'Got it ' + msg.chat.first_name + ', What you want to know...?', {
-      reply_markup: {
-        inline_keyboard: [
-          [{
-            text: 'Global Status',
-            callback_data: 'global'
-          }, {
-            text: 'National Status',
-            callback_data: 'national'
-          }]
-        ]
-      }
-    });
+//           })
+//       }
+//     });
 
-  }
-});
-
-
-bot.on("callback_query", (callback_Query) => {
-  const message = callback_Query.message;
-  if (callback_Query.data == 'global') {
-    // console.log('Global');
-
-    request(`https://thevirustracker.com/free-api?global=stats`, function (error, response, body) {
-      if (!error && response.statusCode == 200) {
-        bot.sendMessage(message.chat.id, '_Looking for _' + '_covid updates around the globe_' + '...', {
-            parse_mode: 'Markdown'
-          })
-          .then(function (msg) {
-            var res = JSON.parse(body);
-            console.log(res)
-            // console.log(res.results[0].total_new_cases_today)
-
-            bot.sendMessage(message.chat.id,
-              'Result:\nTotal Affected Countries :  ' + res.results[0].total_affected_countries +
-              '\n\nNew Cases Today :  ' + res.results[0].total_new_cases_today +
-              '\nNew Deaths Today :  ' + res.results[0].total_new_deaths_today +
-              '\n\nTotal Active Cases :  ' + res.results[0].total_active_cases +
-              '\nTotal Serious Cases :  ' + res.results[0].total_serious_cases +
-              '\nTotal Deaths :  ' + res.results[0].total_cases
-            )    
-
-          })
-
-      }
-    });
-
-  } else {
-
-    request(`https://thevirustracker.com/free-api?countryTimeline=IN`, function (error, response, body) {
-      if (!error && response.statusCode == 200) {
-        bot.sendMessage(message.chat.id, '_Looking for _' + '_covid updates around the globe_' + '...', {
-            parse_mode: 'Markdown'
-          })
-          .then(function (msg) {
-            var res = JSON.parse(body);
-            console.log(res.timelineitems[0]);
-
-            // for (var result = 1; result <= res.totalResults; result++) {
-            //   console.log(res.timelineitems[0].object[result]);
-            // }
-
-          })
-        }
-      });
-
-  }
-  return;
-});
+//   }
+//   return;
+// });
 
 // function ObjectLength( object ) {
 //   var length = 0;
