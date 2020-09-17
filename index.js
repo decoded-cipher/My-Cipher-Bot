@@ -164,7 +164,7 @@ bot.onText(/\/movie (.+)/, (msg, match) => {
         .then(function (msg) {
           var res = JSON.parse(body);
 
-          // console.log(res);
+          console.log(res);
 
           // bot.sendMessage(chatId, 
           //   'Result: \nTitle: ' + res.Title + 
@@ -213,7 +213,7 @@ bot.onText(/\/weather (.+)/, (msg, match) => {
         .then(function (msg) {
           var res = JSON.parse(body);
 
-          // console.log(res);
+          console.log(res);
 
           // bot.sendMessage(chatId, 'Result:\n' + body);
           // var icon_url = `http://openweathermap.org/img/wn/${res.weather[0].icon}@2x.png`;
@@ -311,7 +311,7 @@ bot.onText(/\/news (.+)/, (msg, match) => {
         .then(function (msg) {
           var res = JSON.parse(body);
 
-          // console.log(res);
+          console.log(res);
           // bot.sendMessage(chatId, 'Result:\n' + body);
 
           // bot.sendMessage(chatId,
@@ -361,7 +361,7 @@ bot.onText(/\/articles (.+)/, (msg, match) => {
         .then(function (msg) {
           var res = JSON.parse(body);
 
-          // console.log(res);
+          console.log(res);
 
           for (var result = 1; result <= res.totalResults; result++) {
 
