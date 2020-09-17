@@ -32,7 +32,7 @@ bot.onText(/\/start/, (msg, match) => {
       bot.sendMessage(
         chatId, '😂 Sorry for being so official in words at the first time... 😂'
       );
-    }, 1000);
+    }, 500);
     // return;
 
     setTimeout(() => {
@@ -56,14 +56,14 @@ bot.onText(/\/start/, (msg, match) => {
         '\n-  /news Covid - For daily news updations\n("Covid" is any news keyword)' +
         '\n-  /weather Kottayam - For weather updation\n("Kottayam" is any main location)'
       );
-    }, 1000);
+    }, 2000);
     // return;
 
     setTimeout(() => {
       bot.sendMessage(
         chatId, 'Hey, What are you waiting for... \n Just try something...'
       );
-    }, 1000);
+    }, 3000);
     return;
   }
 });
