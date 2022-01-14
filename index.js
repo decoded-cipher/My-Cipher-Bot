@@ -63,7 +63,7 @@ bot.onText(/\/start/, (msg, match) => {
       bot.sendMessage(
         chatId, 'Hey, What are you waiting for... \n Just try something...'
       );
-    }, 3000);
+    }, 5000);
     return;
   }
 });
@@ -72,7 +72,7 @@ bot.onText(/\/start/, (msg, match) => {
 
 // Reply to /hellobot
 bot.onText(/\/hellobot (.+)/, (msg, match) => {
-  bot.sendMessage(msg.chat.id, 'Ahoy Pirate. Its me, your Cipher Bot. Thanks for your call. But, dont disturb me for an hour or so. Let me have a nap. Im feeling so sleepy. Bye.');
+  bot.sendMessage(msg.chat.id, 'Ahoy Pirate! Its me, your Cipher Bot. Thanks for your call. But, dont disturb me for an hour or so. Let me have a nap. Im feeling so sleepy. Bye.');
 });
 
 
